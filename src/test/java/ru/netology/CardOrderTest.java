@@ -65,8 +65,9 @@ public class CardOrderTest {
         String errorText = driver.findElement(By.cssSelector("[data-test-id=name].input_invalid .input__sub"))
                 .getText()
                 .strip();
-
-        assertEquals("Имя и Фамилия указаны неверно. Допустимы только русские буквы, пробелы и дефисы.", errorText, "Фактический текст [" + errorText + "] не равен ожидаемому");
+        System.out.println("ACTUAL: [" + errorText + "]");
+        System.out.println("EXPECTED: [Имя и Фамилия указаны неверно. Допустимы только русские буквы, пробелы и дефисы.]");
+        assertEquals("Имя и Фамилия указаны неверно. Допустимы только русские буквы, пробелы и дефисы.", errorText);
     }
 
     @Test
