@@ -1,0 +1,10 @@
+image: Ubuntu2004
+
+install:
+  - java -jar ./artifacts/app-order.jar &
+  - sleep 5
+
+build: off
+
+test_script:
+  - ./gradlew test
