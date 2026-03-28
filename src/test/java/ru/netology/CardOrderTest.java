@@ -91,11 +91,11 @@ public class CardOrderTest {
                 .sendKeys("Иванов Иван");
         driver.findElement(By.cssSelector("[data-test-id=phone] input"))
                 .sendKeys("+79001234567");
-        // Флажок НЕ кликаем
+
         driver.findElement(By.cssSelector("button.button")).click();
 
-        WebElement checkbox = driver.findElement(By.cssSelector("[data-test-id=agreement]"));
-        Assertions.assertTrue(checkbox.getAttribute("class").contains("input_invalid"));
+        WebElement checkboxError = driver.findElement(By.cssSelector("[data-test-id=agreement].input_invalid"));
+        Assertions.assertTrue(checkboxError.isDisplayed());
     }
 
     @Test
