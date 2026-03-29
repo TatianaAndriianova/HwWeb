@@ -32,14 +32,15 @@ public class CardOrderTest {
     }
 
     @AfterEach
-    public void tearDown() {
-        // Делаем скриншот перед закрытием
+    public void tearDown(TestInfo testInfo) {
         try {
             TakesScreenshot ts = (TakesScreenshot) driver;
             byte[] screenshot = ts.getScreenshotAs(OutputType.BYTES);
             Path dir = Paths.get("build", "screenshots");
             Files.createDirectories(dir);
-            Files.write(dir.resolve("screen" + ".png"), screenshot);
+            // Используем getMethodName() вместо getDisplayName()
+            String fileName = testInfo.getTestMethod().get().getName() + ".png";
+            Files.write(dir.resolve(fileName), screenshot);
         } catch (Exception e) {
             System.err.println("Screenshot failed: " + e.getMessage());
         }
