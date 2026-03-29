@@ -2,13 +2,11 @@ package ru.netology;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -32,19 +30,7 @@ public class CardOrderTest {
     }
 
     @AfterEach
-    public void tearDown(TestInfo testInfo) {
-        try {
-            TakesScreenshot ts = (TakesScreenshot) driver;
-            byte[] screenshot = ts.getScreenshotAs(OutputType.BYTES);
-            Path dir = Paths.get("build", "screenshots");
-            Files.createDirectories(dir);
-            // Используем getMethodName() вместо getDisplayName()
-            String fileName = testInfo.getTestMethod().get().getName() + ".png";
-            Files.write(dir.resolve(fileName), screenshot);
-        } catch (Exception e) {
-            System.err.println("Screenshot failed: " + e.getMessage());
-        }
-
+    public void tearDown() {
         driver.quit();
         driver = null;
     }
@@ -79,7 +65,7 @@ public class CardOrderTest {
         String errorText = driver.findElement(By.cssSelector("[data-test-id=name].input_invalid .input__sub"))
                 .getText()
                 .strip();
-        assertEquals("Имя и Фамилия указанные неверно. Допустимы только русские буквы, пробелы и дефисы.", errorText);
+        assertEquals("Имя и Фамилия указаны неверно. Допустимы только русские буквы, пробелы и дефисы.", errorText);
     }
 
     @Test
