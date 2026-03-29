@@ -27,3 +27,11 @@ jobs:
 
       - name: Run tests
         run: ./gradlew test --info
+
+      - name: Upload screenshots        # ← добавь только это
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: build/screenshots/
+          if-no-files-found: ignore
